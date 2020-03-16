@@ -1,0 +1,69 @@
+<?php
+class td_category_top_posts_style_4 extends td_category_top_posts_style {
+	function show_top_posts() {
+
+		parent::render_posts_to_buffer();
+
+
+		if (parent::get_rendered_post_count() == 0) {
+
+			return; // die here
+		}
+		?>
+
+		<!-- big grid -->
+		<div class="td-category-grid td-container-wrap">
+			<div class="td-container">
+				<div class="td-pb-row">
+					<div class="td-pb-span12">
+					    
+<div class="td_block_wrap td_block_big_grid_4 td_uid_9_5c52caa83ca7a_rand td-grid-style-1 td-hover-1 td-big-grids td-pb-border-top td_block_template_1" data-td-block-uid="td_uid_9_5c52caa83ca7a"><div id="td_uid_9_5c52caa83ca7a" class="td_block_inner"><div class="td-big-grid-wrapper">
+       
+					    <?php
+					    $categories = get_the_category();
+$category_id = $categories[0]->cat_ID;
+					    ?>
+	<?php
+global $post;
+echo "hivcbvc".$category_id;
+$args = array( 'posts_per_page' => 50, 'offset'=> 0, 'category' => $category_id );
+$myposts = get_posts( $args );
+$max_loop=2; //This is the desired value of Looping
+foreach( $myposts as $post ) : setup_postdata($post); 
+$display_in_category_top_2_box = get_field('display_in_category_top_2_box_');
+?>
+<?php $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), array("532","399") ); ?>
+ <div class="td_module_mx5 td-animation-stack td-big-grid-post-0 td-big-grid-post td-big-thumb">
+            <div class="td-module-thumb">
+                <a href="<?php the_permalink(); ?>" rel="bookmark" class="td-image-wrap" title="<?php the_title(); ?>">
+                    <img class="entry-thumb td-animation-stack-type0-2" src="<?php echo $image[0]; ?>" alt="" title="<?php the_title(); ?>">
+                </a>
+            </div>            
+            <div class="td-meta-info-container">
+                <div class="td-meta-align">
+                    <div class="td-big-grid-meta">
+                    <h3 class="entry-title td-module-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>                    </div>
+                    <div class="td-module-meta-info">
+                        <span class="td-post-date"><time class="entry-date updated td-module-date" datetime="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></time></span>                    </div>
+                </div>
+            </div>
+
+        </div>
+<?php 
+endforeach; ?>			    
+	    
+
+        </div><div class="clearfix"></div></div></div>
+        
+        
+						<?php
+						//echo get_the_ID().'<br>';
+						//echo parent::get_buffer();
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
+	<?php
+	}
+}
